@@ -1,0 +1,9 @@
+TC1
+Total Sales Cost: $2481.86        
+Execution Time: 0.00 seconds
+TC2
+Total Sales Cost: $166568.23        
+Execution Time: 0.00 seconds
+TC3
+Total Sales Cost: $165235.37        
+Execution Time: 0.00 seconds
