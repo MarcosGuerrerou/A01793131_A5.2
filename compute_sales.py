@@ -1,11 +1,13 @@
+"""Module to compute sales from catalog and records"""
 import json
 import sys
 import time
 
 
 def load_json_data(filepath):
+    """Load data from a JSON file"""
     try:
-        with open(filepath, 'r') as file:
+        with open(filepath, 'r', encoding='utf-8') as file:
             return json.load(file)
     except (json.JSONDecodeError, FileNotFoundError) as e:
         print(f"Error loading {filepath}: {e}")
@@ -13,6 +15,7 @@ def load_json_data(filepath):
 
 
 def map_prices_to_titles(products):
+    """Create a dictionary of product titles and their prices"""
     prices = {}
     for product in products:
         prices[product['title'].lower()] = product['price']
@@ -20,6 +23,7 @@ def map_prices_to_titles(products):
 
 
 def calculate_total_sales(prices, sales):
+    """Calculate the total cost of sales and check for errors"""
     total_cost = 0
     errors = False
     for sale in sales:
@@ -43,6 +47,7 @@ def calculate_total_sales(prices, sales):
 
 
 def main(price_catalogue_path, sales_record_path):
+    """Compute the total sales"""
     start_time = time.time()
 
     products = load_json_data(price_catalogue_path)
@@ -61,7 +66,7 @@ def main(price_catalogue_path, sales_record_path):
     print(result_str)
 
     if not errors:
-        with open("SalesResults.txt", "a") as file:
+        with open("SalesResults.txt", "a", encoding='utf-8') as file:
             file.write(result_str)
 
 
@@ -70,6 +75,6 @@ if __name__ == "__main__":
         print("Usage: python compute_sales.py \
               priceCatalogue.json salesRecord.json")
     else:
-        price_catalogue_path = sys.argv[1]
-        sales_record_path = sys.argv[2]
-        main(price_catalogue_path, sales_record_path)
+        catalogue_path = sys.argv[1]
+        sales_path = sys.argv[2]
+        main(catalogue_path, sales_path)
